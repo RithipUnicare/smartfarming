@@ -1,0 +1,583 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "OpenAPI definition", "version": "v0" },
+  "servers": [
+    {
+      "url": "http://app.undefineddevelopers.online/smartfarming/api",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/users/edit": {
+      "put": {
+        "tags": ["user-controller"],
+        "operationId": "editUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserEditRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/recommendation": {
+      "post": {
+        "tags": ["crop-recommendation-controller"],
+        "operationId": "recommend",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CropRecommendationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "type": "object", "additionalProperties": {} }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "tags": ["order-controller"],
+        "operationId": "placeOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OrderCreateRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Order" } }
+            }
+          }
+        }
+      }
+    },
+    "/farmer/profile": {
+      "get": {
+        "tags": ["farmer-controller"],
+        "operationId": "getProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/FarmerProfile" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["farmer-controller"],
+        "operationId": "saveProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FarmerProfileRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/FarmerProfile" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crops": {
+      "post": {
+        "tags": ["crop-controller"],
+        "operationId": "createCrop",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CropCreateRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/Crop" } }
+            }
+          }
+        }
+      }
+    },
+    "/crops/{cropId}/image": {
+      "post": {
+        "tags": ["crop-controller"],
+        "operationId": "uploadCropImage",
+        "parameters": [
+          {
+            "name": "cropId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": { "type": "string", "format": "binary" }
+                },
+                "required": ["image"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/buyer/profile": {
+      "get": {
+        "tags": ["buyer-controller"],
+        "operationId": "getProfile_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/BuyerProfile" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["buyer-controller"],
+        "operationId": "saveProfile_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BuyerProfileRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/BuyerProfile" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "signup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SignupRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "resetPassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { "type": "string" }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/auth/request-password-reset": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "requestPasswordReset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { "type": "string" }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/update-role": {
+      "post": {
+        "tags": ["admin-controller"],
+        "operationId": "updateRole",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RoleUpdateRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/admin/approve-crop/{id}": {
+      "post": {
+        "tags": ["admin-controller"],
+        "operationId": "approveCrop",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["user-controller"],
+        "operationId": "getAllUsers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/User" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": ["user-controller"],
+        "operationId": "myProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/User" } }
+            }
+          }
+        }
+      }
+    },
+    "/orders/my": {
+      "get": {
+        "tags": ["order-controller"],
+        "operationId": "getMyOrders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Order" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crops/my": {
+      "get": {
+        "tags": ["crop-controller"],
+        "operationId": "getMyCrops",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Crop" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crops/approved": {
+      "get": {
+        "tags": ["crop-controller"],
+        "operationId": "getApprovedCrops",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Crop" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "delete": {
+        "tags": ["user-controller"],
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserEditRequest": {
+        "type": "object",
+        "properties": {
+          "mobileNumber": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      },
+      "CropRecommendationRequest": {
+        "type": "object",
+        "properties": {
+          "district": { "type": "string" },
+          "state": { "type": "string" },
+          "soilType": { "type": "string" },
+          "season": { "type": "string" }
+        }
+      },
+      "OrderCreateRequest": {
+        "type": "object",
+        "properties": {
+          "cropId": { "type": "integer", "format": "int64" },
+          "quantity": { "type": "number", "format": "double" }
+        }
+      },
+      "BuyerProfile": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "user": { "$ref": "#/components/schemas/User" },
+          "address": { "type": "string" }
+        }
+      },
+      "Crop": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "farmer": { "$ref": "#/components/schemas/FarmerProfile" },
+          "cropName": { "type": "string" },
+          "quantity": { "type": "number", "format": "double" },
+          "pricePerUnit": { "type": "number", "format": "double" },
+          "harvestDate": { "type": "string", "format": "date" },
+          "imageUrl": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      },
+      "FarmerProfile": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "user": { "$ref": "#/components/schemas/User" },
+          "address": { "type": "string" },
+          "district": { "type": "string" },
+          "state": { "type": "string" },
+          "landSize": { "type": "number", "format": "double" },
+          "soilType": { "type": "string" }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "buyer": { "$ref": "#/components/schemas/BuyerProfile" },
+          "crop": { "$ref": "#/components/schemas/Crop" },
+          "quantity": { "type": "number", "format": "double" },
+          "totalAmount": { "type": "number", "format": "double" },
+          "status": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "name": { "type": "string" },
+          "mobileNumber": { "type": "string" },
+          "password": { "type": "string" },
+          "roles": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      },
+      "FarmerProfileRequest": {
+        "type": "object",
+        "properties": {
+          "address": { "type": "string" },
+          "district": { "type": "string" },
+          "state": { "type": "string" },
+          "landSize": { "type": "number", "format": "double" },
+          "soilType": { "type": "string" }
+        }
+      },
+      "CropCreateRequest": {
+        "type": "object",
+        "properties": {
+          "cropName": { "type": "string" },
+          "quantity": { "type": "number", "format": "double" },
+          "pricePerUnit": { "type": "number", "format": "double" },
+          "harvestDate": { "type": "string", "format": "date" }
+        }
+      },
+      "BuyerProfileRequest": {
+        "type": "object",
+        "properties": { "address": { "type": "string" } }
+      },
+      "SignupRequest": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "mobileNumber": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "mobileNumber": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "RoleUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "mobileNumber": { "type": "string" },
+          "roles": { "type": "string" }
+        }
+      }
+    }
+  }
+}
