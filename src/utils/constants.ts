@@ -1,5 +1,5 @@
 export const API_BASE_URL =
-  'http://app.undefineddevelopers.online/smartfarming/api';
+  'https://app.undefineddevelopers.online/smartfarming/api';
 
 export const STATES_LIST = [
   'Andhra Pradesh',
